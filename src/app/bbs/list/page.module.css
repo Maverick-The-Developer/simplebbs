@@ -1,23 +1,48 @@
 .ListPage {
-  max-width: 800px;
-  margin-inline: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-  padding-block: 2rem;
+  width: 100%;
+  padding: 1rem;
 }
 .ListPage > h1 {
   width: fit-content;
+  margin-inline: auto;
   color: #222222;
   font-size: 2rem;
   font-weight: normal;
+  margin-bottom: 1em;
 }
 
-.pageTitle {
-  color: blue;
+.listTable {
+  width: 100%;
+  max-width: 800px;
+  margin-inline: auto;
 }
 
-.largeFont {
-  font-size: 8rem;
+.listRow {
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-bottom: 1px solid #cccccc;
+}
+.listRow p {
+  padding-inline: 0.5rem;
+  width: fit-content;
+  text-align: center;
+}
+
+.listRow p:nth-child(1) {
+  width: 50px;
+}
+.listRow p:nth-child(2) {
+  flex: 1 0;
+}
+.listRow p:nth-child(3) {
+  width: 100px;
+}
+.listRow p:nth-child(4) {
+  width: 100px;
+}
+.listRow p.leftAlign {
+  text-align: left;
 }
