@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import styles from './page.module.css'
 import { useSearchParams } from 'next/navigation'
 import PagingBar from '@/components/PagingBar'
+import Link from 'next/link'
+import { UTC2Local } from '@/lib/utils'
 
 type TLine = {
   id: string
@@ -30,12 +32,12 @@ export default function ListPage({}: Props) {
   const currentPage = parseInt(searchParams.get('page') || '1', 10)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [list, setList] = useState<TLine[] | null>(null)
-  const noStart = totalCount - ((currentPage - 1) * itemsPerPage)
+  const noStart = totalCount - (currentPage - 1) * itemsPerPage
 
   async function fetchData(page: number = 1) {
     let url = 'http://bbsapi.mavericksoft.xyz/bbsapi'
     let paramsArray: string[] = []
-    if  (page > 1) {
+    if (page > 1) {
       paramsArray.push(`p=${page}`)
     }
     paramsArray.push(`n=${itemsPerPage}`)
@@ -53,10 +55,7 @@ export default function ListPage({}: Props) {
       const data: TDTO = await response.json()
       setTotalCount(data.totalCount)
       const titleList: TLine[] = data.list.map((item) => {
-        const tempDate = new Date(item.created_at)
-        const newDate = `${tempDate.getFullYear()}-${String(
-          tempDate.getMonth() + 1
-        ).padStart(2, '0')}-${String(tempDate.getDate()).padStart(2, '0')}`
+        const newDate = UTC2Local(item.created_at)
         return {
           id: item.id,
           title: item.title,
@@ -84,14 +83,20 @@ export default function ListPage({}: Props) {
         </div>
         {list?.map((line, idx) => (
           <div key={line.id} className={styles.listRow}>
-            <p>{noStart - idx }</p>
-            <p className={styles.leftAlign}>{line.title}</p>
+            <p>{noStart - idx}</p>
+            <p className={styles.leftAlign}>
+              <Link href={`/bbs/view/${line.id}`}>{line.title}</Link>
+            </p>
             <p>{line.author}</p>
             <p>{line.date}</p>
           </div>
         ))}
       </div>
-      <PagingBar currentPage={currentPage} totalCount={totalCount} itemsPerPage={itemsPerPage}/>
+      <PagingBar
+        currentPage={currentPage}
+        totalCount={totalCount}
+        itemsPerPage={itemsPerPage}
+      />
     </div>
   )
 }
