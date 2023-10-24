@@ -1,0 +1,23 @@
+.ListPage {
+  max-width: 800px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-block: 2rem;
+}
+.ListPage > h1 {
+  width: fit-content;
+  color: #222222;
+  font-size: 2rem;
+  font-weight: normal;
+}
+
+.pageTitle {
+  color: blue;
+}
+
+.largeFont {
+  font-size: 8rem;
+}
