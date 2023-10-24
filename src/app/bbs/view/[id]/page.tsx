@@ -17,7 +17,7 @@ export default function ViewPage({ params }: { params: { id: string } }) {
   const id = params.id
   const [postData, setPostData] = useState<TDTO | null>(null)
 
-  async function fetchData() {
+  async function fetchData(id:string) {
     const response = await fetch(`http://bbsapi.mavericksoft.xyz/bbsapi/${id}`)
     if (response.ok) {
       const data: TDTO = await response.json()
@@ -29,8 +29,8 @@ export default function ViewPage({ params }: { params: { id: string } }) {
   }
 
   useEffect(() => {
-    fetchData()
-  }, [])
+    fetchData(id)
+  }, [id])
 
   return (
     <div className={styles.ViewPage}>
