@@ -1,8 +1,8 @@
 'use client'
 import { UTC2Local } from '@/lib/utils'
-import Link from 'next/link'
 import React, { useEffect, useState } from 'react'
 import styles from './page.module.css'
+import { useRouter } from 'next/navigation'
 
 type TDTO = {
   id: string
@@ -16,6 +16,7 @@ type TDTO = {
 export default function ViewPage({ params }: { params: { id: string } }) {
   const id = params.id
   const [postData, setPostData] = useState<TDTO | null>(null)
+  const router = useRouter()
 
   async function fetchData(id:string) {
     const response = await fetch(`http://bbsapi.mavericksoft.xyz/bbsapi/${id}`)
@@ -41,8 +42,8 @@ export default function ViewPage({ params }: { params: { id: string } }) {
       </p>
       <p className={styles.content}>{postData?.content}</p>
       <p className={styles.buttonBar}>
-        <button onClick={() => {}}>수정</button>
-        <button onClick={() => {}}>목록으로</button>
+        <button onClick={() => {router.replace(`/bbs/edit/${postData?.id}`)}}>수정</button>
+        <button onClick={() => {router.back()}}>목록으로</button>
       </p>
     </div>
   )

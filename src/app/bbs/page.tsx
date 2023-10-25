@@ -92,11 +92,14 @@ export default function ListPage({}: Props) {
           </div>
         ))}
       </div>
-      <PagingBar
-        currentPage={currentPage}
-        totalCount={totalCount}
-        itemsPerPage={itemsPerPage}
-      />
+      <div className={styles.buttomBar}>
+        <PagingBar
+          currentPage={currentPage}
+          totalCount={totalCount}
+          itemsPerPage={itemsPerPage}
+        />
+        <Link href='/bbs/new'>글쓰기</Link>
+      </div>
     </div>
   )
 }

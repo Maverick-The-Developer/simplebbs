@@ -21,19 +21,19 @@ export default function PagingBar({ currentPage, totalCount, itemsPerPage }: Pro
   }
 
   function gotoFirstPage() {
-    router.push('/bbs/list?page=1')
+    router.push('/bbs?page=1')
   }
   function gotoPrevPage() {
-    router.push(`/bbs/list?page=${currentPage - 1}`)
+    router.push(`/bbs?page=${currentPage - 1}`)
   }
   function gotoThisPage(pageNo: number) {
-    router.push(`/bbs/list?page=${pageNo}`)
+    router.push(`/bbs?page=${pageNo}`)
   }
   function gotoNextPage() {
-    router.push(`/bbs/list?page=${currentPage + 1}`)
+    router.push(`/bbs?page=${currentPage + 1}`)
   }
   function gotoLastPage() {
-    router.push(`/bbs/list?page=${lastPage}`)
+    router.push(`/bbs?page=${lastPage}`)
   }
 
   return (
