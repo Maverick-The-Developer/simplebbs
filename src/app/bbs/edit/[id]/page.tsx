@@ -70,40 +70,18 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
     if (response.ok) {
       // post success
       alert('글이 수정되었습니다.')
-      router.replace('/bbs')
+      router.back()
     } else {
       alert('글 수정에 문제가 발생하였습니다. 관리자에게 문의하세요')
       return
     }
   }
 
-  async function deleteData() {
-    const url = `${FETCH_ENDPOINT}/${postID}`
-    const response = await fetch(url, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type':'application/json'
-      }
-    })
-    if (response.ok) {
-      alert('글이 삭제되었습니다')
-      router.replace('/bbs')
-    } else {
-      alert('글삭제 과정에 문제가 발생하였습니다. 관리자에게 문의하세요')
-    }
-  }
 
 
   function handleOk(event: MouseEvent<HTMLButtonElement>) {
     event.preventDefault()
     sendData()
-  }
-
-  function handleDelete(event: MouseEvent<HTMLButtonElement>) {
-    event.preventDefault()
-    if(confirm('이 게시글을 정말 삭제하시겠습니까? 되돌릴 수 없는 작업입니다.')) {
-      deleteData()
-    }
   }
 
   function handleCancel(event: MouseEvent<HTMLButtonElement>) {
@@ -132,9 +110,6 @@ export default function EditPostPage({ params }: { params: { id: string } }) {
       <div className={styles.buttonBar}>
         <button className={styles.primary} onClick={handleOk}>
           수정
-        </button>
-        <button className={styles.warning} onClick={handleDelete}>
-          삭제
         </button>
         <button className={styles.secondary} onClick={handleCancel}>
           취소

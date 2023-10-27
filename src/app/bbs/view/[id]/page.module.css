@@ -33,6 +33,7 @@
   justify-content: flex-end;
   gap: 1rem;
 }
+.buttonBar a,
 .buttonBar button {
   border: 1px solid #999;
   border-radius: 5px;
@@ -45,4 +46,14 @@
 .buttonBar button:hover {
   color: white;
   background-color: #999;
+}
+button.warning {
+  color: #e06040;
+  border-color: #e06040;
+  background-color: white;
+}
+button.warning:hover {
+  background-color: #e06040;
+  border-color: #e06040;
+  color: white;
 }
