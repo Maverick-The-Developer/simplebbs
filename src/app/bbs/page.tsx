@@ -6,6 +6,7 @@ import PagingBar from '@/components/PagingBar'
 import Link from 'next/link'
 import { UTC2Local } from '@/lib/utils'
 import { useRouter } from 'next/navigation'
+import PagingNav from '@/components/PagingNav'
 
 type TLine = {
   id: string
@@ -32,6 +33,7 @@ export default function ListPage({}: Props) {
   const itemsPerPage = 5
   const currentPage = parseInt(searchParams.get('page') || '1', 10)
   const [totalCount, setTotalCount] = useState<number>(0)
+  const [totalPage, setTotalPage]  = useState<number>(1)
   const [list, setList] = useState<TLine[] | null>(null)
   const noStart = totalCount - (currentPage - 1) * itemsPerPage
   const router = useRouter()
@@ -66,6 +68,7 @@ export default function ListPage({}: Props) {
         }
       })
       setList(titleList)
+      setTotalPage(data.totalCount < 1 ? 1 : Math.ceil(data.totalCount / itemsPerPage))
     } else {
       alert('게시글 목록을 가져오지 못했습니다. 인터넷 연결을 확인하세요')
     }
@@ -100,11 +103,12 @@ export default function ListPage({}: Props) {
         ))}
       </div>
       <div className={styles.buttomBar}>
-        <PagingBar
+        {/* <PagingBar
           currentPage={currentPage}
           totalCount={totalCount}
           itemsPerPage={itemsPerPage}
-        />
+        /> */}
+        <PagingNav currentPage={currentPage} totalPage={totalPage} />
         <Link href='/bbs/new'>글쓰기</Link>
       </div>
     </div>

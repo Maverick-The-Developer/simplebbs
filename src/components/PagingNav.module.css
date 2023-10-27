@@ -1,0 +1,26 @@
+.PagingNav {
+  padding-inline: 1rem;
+  padding-block: 1rem;
+  width: fit-content;
+  margin-inline: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+}
+.PagingNav > input {
+  width: 4rem;
+  font-size: 1.2rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid #666;
+  border-radius: 5px;
+}
+.PagingNav > label {
+  line-height: 1.2rem;
+  font-size: 1.0rem;
+}
+.PagingNav > a {
+  font-size: 1.4rem;
+  line-height: 1rem;
+}
