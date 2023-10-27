@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react'
 import styles from './PagingBar.module.css'
 import { useRouter } from 'next/navigation'
+import { BiSolidSkipPreviousCircle, BiSolidSkipNextCircle, BiCaretLeftCircle, BiCaretRightCircle } from 'react-icons/bi'
 
 type Props = {
   currentPage: number
@@ -38,11 +39,11 @@ export default function PagingBar({ currentPage, totalCount, itemsPerPage }: Pro
 
   return (
     <div className={styles.PagingBar}>
-      <button disabled={currentPage <= 1} onClick={() => gotoFirstPage()}>
-        &lt;&lt;
+      <button disabled={currentPage <= 1} onClick={() => gotoFirstPage()} title='첫 페이지'>
+        <BiSolidSkipPreviousCircle />
       </button>
-      <button disabled={currentPage <= 1} onClick={() => gotoPrevPage()}>
-        &lt;
+      <button disabled={currentPage <= 1} onClick={() => gotoPrevPage()} title='이전 페이지'>
+        <BiCaretLeftCircle />
       </button>
       {pageArray.map((pageNo) => {
         return (
@@ -56,11 +57,11 @@ export default function PagingBar({ currentPage, totalCount, itemsPerPage }: Pro
           </button>
         )
       })}
-      <button disabled={currentPage >= lastPage} onClick={() => gotoNextPage()}>
-        &gt;
+      <button disabled={currentPage >= lastPage} onClick={() => gotoNextPage()} title='다음 페이지'>
+        <BiCaretRightCircle />
       </button>
-      <button disabled={currentPage >= lastPage} onClick={() => gotoLastPage()}>
-        &gt;&gt;
+      <button disabled={currentPage >= lastPage} onClick={() => gotoLastPage()} title='마지막 페이지'>
+        <BiSolidSkipNextCircle />
       </button>
     </div>
   )

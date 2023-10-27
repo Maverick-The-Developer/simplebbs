@@ -5,6 +5,7 @@ import { useSearchParams } from 'next/navigation'
 import PagingBar from '@/components/PagingBar'
 import Link from 'next/link'
 import { UTC2Local } from '@/lib/utils'
+import { useRouter } from 'next/navigation'
 
 type TLine = {
   id: string
@@ -28,11 +29,12 @@ type Props = {}
 
 export default function ListPage({}: Props) {
   const searchParams = useSearchParams()
-  const itemsPerPage = 10
+  const itemsPerPage = 5
   const currentPage = parseInt(searchParams.get('page') || '1', 10)
   const [totalCount, setTotalCount] = useState<number>(0)
   const [list, setList] = useState<TLine[] | null>(null)
   const noStart = totalCount - (currentPage - 1) * itemsPerPage
+  const router = useRouter()
 
   async function fetchData(page: number = 1) {
     let url = 'http://bbsapi.mavericksoft.xyz/bbsapi'
@@ -68,6 +70,11 @@ export default function ListPage({}: Props) {
       alert('게시글 목록을 가져오지 못했습니다. 인터넷 연결을 확인하세요')
     }
   }
+
+  function gotoView(id: string) {
+    router.push(`/bbs/view/${id}`)
+  }
+
   useEffect(() => {
     fetchData(currentPage)
   }, [currentPage])
@@ -75,17 +82,17 @@ export default function ListPage({}: Props) {
     <div className={styles.ListPage}>
       <h1>간단 게시판</h1>
       <div className={styles.listTable}>
-        <div className={styles.listRow}>
+        <div className={styles.listHeader}>
           <p>No.</p>
           <p>제목</p>
           <p>글쓴이</p>
           <p>작성일</p>
         </div>
         {list?.map((line, idx) => (
-          <div key={line.id} className={styles.listRow}>
+          <div key={line.id} className={styles.listRow} onClick={() => gotoView(line.id)}>
             <p>{noStart - idx}</p>
             <p className={styles.leftAlign}>
-              <Link href={`/bbs/view/${line.id}`}>{line.title}</Link>
+              {line.title}
             </p>
             <p>{line.author}</p>
             <p>{line.date}</p>

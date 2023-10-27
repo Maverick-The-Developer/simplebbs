@@ -17,6 +17,14 @@
   margin-inline: auto;
 }
 
+.listHeader {
+  background-color: #e0e0e0;
+  width: 100%;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
 .listRow {
   width: 100%;
   height: 40px;
@@ -25,21 +33,30 @@
   align-items: center;
   border-bottom: 1px solid #cccccc;
 }
+.listRow:hover {
+  cursor: pointer;
+  background-color: #f0f0f0;
+}
+.listHeader p,
 .listRow p {
   padding-inline: 0.5rem;
   width: fit-content;
   text-align: center;
 }
 
+.listHeader p:nth-child(1),
 .listRow p:nth-child(1) {
   width: 50px;
 }
+.listHeader p:nth-child(2),
 .listRow p:nth-child(2) {
   flex: 1 0;
 }
+.listHeader p:nth-child(3),
 .listRow p:nth-child(3) {
   width: 100px;
 }
+.listHeader p:nth-child(4),
 .listRow p:nth-child(4) {
   width: 100px;
 }
